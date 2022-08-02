@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+    <ul class="nav justify-content-center navbar navbar-expand-lg navbar-light bg-light">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://pinkybeard.pythonanywhere.com/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://pinkybeard.pythonanywhere.com/">Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">A propos</a>
+      </li>
+    </ul>
+
+
+<div class="container text-center h-100 w-100">
+     <div class="row">
+    {% for i in page.get_recent_blogs %}
+    {% if forloop.counter0 < 3 %}
+
+        <div class="col-sm">
+        <a href = {{ i.get_url }} class ="h-100 w-100 d-block">
+          <h2>{{i.title}}</h2>
+           {% image i.frontImage max-200x200 as bg_img %}
+          <img src={{ bg_img.url }}>
+         </a>
+        </div>
+
+    {% endif %}
+    {% endfor %}
+    </div>
+
+     <div class="row">
+    {% for i in page.get_recent_blogs %}
+    {% if forloop.counter0 < 6 and forloop.counter0 >= 3 %}:
+        <div class="col-sm">
+          {{i.title}}
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class="row">
+    {% for i in page.get_recent_blogs %}
+    {% if forloop.counter0 >= 6 %}:
+        <div class="col-sm">
+          {{i.title}}
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+
+    <ul class="nav justify-content-center navbar navbar-expand-lg navbar-light bg-light">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://pinkybeard.pythonanywhere.com/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://pinkybeard.pythonanywhere.com/">Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">A propos</a>
+      </li>
+    </ul>
+    </br>
+
+<h1 class = "text-center">{{ page.title }}</h1>
+</br>
+{% image page.frontImage max-1000x500 as bg_img %}
+<div class="container px-5">
+  <div class="row">
+<img src={{ bg_img.url }} class="img-fluid w-100 h-50">
+  </div>
+</div>
+</br>
+<p class="text-info">{{ page.last_published_at }}</p>
+<section class = "text-justify mx-5">
+    {{ page.body|richtext }}
+
+</section>
+{% endblock %}
